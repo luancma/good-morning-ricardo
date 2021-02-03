@@ -1,6 +1,5 @@
 import React from 'react';
 import useImage from 'use-image';
-import Image1 from "./assets/images/1.jpg";
 import StateReact from './components/konva';
 import Axios from 'axios';
 
