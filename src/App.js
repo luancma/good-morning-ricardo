@@ -36,7 +36,6 @@ function App() {
   
     return `bom%20dia%20${weekday[d.getDay()]}`;
   }
-  
 
   function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -45,12 +44,14 @@ function App() {
   }
 
   React.useEffect(() => {
-    console.log(getStringWithDay())
-    Axios.get(`https://www.googleapis.com/customsearch/v1?q=${getStringWithDay()}&key=AIzaSyDmsMFexOfkWb8ReBWbe6iT-z-gy3Q9XQ4&cx=5d3148e9b4ad36fa6&start=${getRandomIntInclusive(1, 3)}`)
-    .then(response => {
-      const url = response.data.items[getRandomIntInclusive(1, 10)].pagemap.cse_image[0].src
-      setImageUrl(url)
+    Axios.get("http://172.18.62.150:8000/").then(response => {
+      setImageUrl(response.data.urlPath)
     })
+    // Axios.get(`https://www.googleapis.com/customsearch/v1?q=${getStringWithDay()}&key=AIzaSyAwp7YnEblRiUP0gzRasVU7fD_PHZQ_A0c&cx=5d3148e9b4ad36fa6&start=${getRandomIntInclusive(1, 3)}`)
+    // .then(response => {
+    //   const url = response.data.items[getRandomIntInclusive(1, 10)].pagemap.cse_image[0].src
+    //   setImageUrl(url)
+    // })
   }, [])
 
   return (
@@ -59,10 +60,12 @@ function App() {
       alignItems: 'center',
       flexDirection: 'column'
     }}>
-      {!image ? (
+      {!imageUrl ? (
         <h1>Carregando</h1>
       ): (
-        <StateReact imageProps={image} stageSizes={stageSizes}/>
+        <>
+        <StateReact imageProps={image} stageSizes={stageSizes} img={imageUrl}/>
+        </>
       )}
     </div>
   );
