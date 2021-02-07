@@ -44,7 +44,8 @@ function App() {
   }
 
   React.useEffect(() => {
-    Axios.get("http://172.18.62.150:8000/").then(response => {
+    const url = "https://backend-ricardo.herokuapp.com"
+    Axios.get(url).then(response => {
       setImageUrl(response.data.urlPath)
     })
     // Axios.get(`https://www.googleapis.com/customsearch/v1?q=${getStringWithDay()}&key=AIzaSyAwp7YnEblRiUP0gzRasVU7fD_PHZQ_A0c&cx=5d3148e9b4ad36fa6&start=${getRandomIntInclusive(1, 3)}`)
