@@ -48,11 +48,7 @@ function App() {
     Axios.get(url).then(response => {
       setImageUrl(response.data.urlPath)
     })
-    // Axios.get(`https://www.googleapis.com/customsearch/v1?q=${getStringWithDay()}&key=AIzaSyAwp7YnEblRiUP0gzRasVU7fD_PHZQ_A0c&cx=5d3148e9b4ad36fa6&start=${getRandomIntInclusive(1, 3)}`)
-    // .then(response => {
-    //   const url = response.data.items[getRandomIntInclusive(1, 10)].pagemap.cse_image[0].src
-    //   setImageUrl(url)
-    // })
+   
   }, [])
 
   return (
