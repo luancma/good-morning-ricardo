@@ -9,8 +9,8 @@ const TextComponent = ({ textString, imageDetails }) => {
             y={imageDetails.height}
             align="center"
             text={textString}
-            fontSize="42"
-            drawBorder
+            fontSize={42},
+            x={imageDetails.width/2}
         />
     )
 } 
@@ -57,6 +57,7 @@ const StateReact = ({ imageProps, stageSizes, img }) => {
         <div style={{
             display: "flex",
             flexDirection: "column",
+ background: "fff"
         }}>
         <Stage width={stageSizes.width * 0.45} height={(stageSizes.height * 0.45) + 42} ref={stageRef} scaleX={0.45} scaleY={0.45} >
             <Layer id="mycanvas">
