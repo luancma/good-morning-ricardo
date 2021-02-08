@@ -11,6 +11,9 @@ const TextComponent = ({ textString, imageDetails }) => {
             text={textString}
             fontSize="42"
             drawBorder
+            padding={16}
+            fill="purple"
+            draggable
         />
     )
 } 
@@ -51,12 +54,11 @@ const StateReact = ({ imageProps, stageSizes, img }) => {
         // window.location.href=image; // it will save locally
     }
 
-
-
     return (
         <div style={{
             display: "flex",
             flexDirection: "column",
+            background: "#fff"
         }}>
         <Stage width={stageSizes.width * 0.45} height={(stageSizes.height * 0.45) + 42} ref={stageRef} scaleX={0.45} scaleY={0.45} >
             <Layer id="mycanvas">
