@@ -1,26 +1,34 @@
-import React from 'react';
-import useImage from 'use-image';
-import StateReact from './components/konva';
-import Axios from 'axios';
+import React from "react";
+import OneSignal from "react-onesignal";
+import useImage from "use-image";
+import StateReact from "./components/konva";
+import Axios from "axios";
 
 function App() {
-  const [imageUrl, setImageUrl] = React.useState('');
+  const [imageUrl, setImageUrl] = React.useState("");
   const [stageSizes, setStageSizes] = React.useState({
     width: 0,
-    height: 0
-  })
-  const [image] = useImage(imageUrl)
+    height: 0,
+  });
+  const [image] = useImage(imageUrl);
 
-  
   React.useEffect(() => {
-    if(image){
+    OneSignal.init({
+      appId: `${process.env.REACT_APP_ONE_SIGNAL}`,
+      allowLocalhostAsSecureOrigin: true,
+    });
+  }, []);
+
+  console.log(process.env.REACT_APP_ONE_SIGNAL);
+
+  React.useEffect(() => {
+    if (image) {
       setStageSizes({
         width: image.width,
-        height: image.height
-      })
+        height: image.height,
+      });
     }
-  }, [image])
-  
+  }, [image]);
 
   // utils
   function getStringWithDay() {
@@ -33,7 +41,7 @@ function App() {
     weekday[4] = "quinta&feira";
     weekday[5] = "sexta&feira";
     weekday[6] = "sábado";
-  
+
     return `bom%20dia%20${weekday[d.getDay()]}`;
   }
 
@@ -44,24 +52,29 @@ function App() {
   }
 
   React.useEffect(() => {
-    const url = "https://backend-ricardo.herokuapp.com"
-    Axios.get(url).then(response => {
-      setImageUrl(response.data.urlPath)
-    })
-   
-  }, [])
+    const url = "https://backend-ricardo.herokuapp.com";
+    Axios.get(url).then((response) => {
+      setImageUrl(response.data.urlPath);
+    });
+  }, []);
 
   return (
-    <div style={{
-      display: "flex",
-      alignItems: 'center',
-      flexDirection: 'column'
-    }}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       {!imageUrl ? (
         <h1>Carregando</h1>
-      ): (
+      ) : (
         <>
-        <StateReact imageProps={image} stageSizes={stageSizes} img={imageUrl}/>
+          <StateReact
+            imageProps={image}
+            stageSizes={stageSizes}
+            img={imageUrl}
+          />
         </>
       )}
     </div>
